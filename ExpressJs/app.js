@@ -85,6 +85,7 @@ const express = require('express');
 // const cors = require('cors');
 
 const app = express();
+app.use(express.json());
 
 // CORS middleware
 // app.use(cors());
@@ -94,6 +95,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const brandRouter = express.Router();
+
+const brands = [
+  { brand_name: "Marque Test 1", description: "Description 1", created_at: formatDate(new Date()) },
+  { brand_name: "Marque Test 2", description: "Description 2", created_at: formatDate(new Date()) }
+];
 
 function formatDate(date) {
   const d = new Date(date);
@@ -105,15 +111,26 @@ function formatDate(date) {
   return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 brandRouter.get('/getallbrands', (req, res) => {
-  res.json([
-    { brand_name: "Marque Test 1", description: "Description 1", created_at: now },
-    { brand_name: "Marque Test 2", description: "Description 2", created_at: now }
-  ]);
+  res.json(brands);
 });
 
 brandRouter.post('/storebrand', (req, res) => {
-  console.log('Données reçues:', req.body);
-  res.status(201).json({ message: 'Données reçues avec succès', data: req.body });
+  const { brand_name, description } = req.body;
+
+  if (!brand_name || !description) {
+    return res.status(400).json({ message: 'Champs requis manquants' });
+  }
+
+  const newBrand = {
+    brand_name,
+    description,
+    created_at: formatDate(new Date())
+  };
+
+  brands.push(newBrand);
+  console.log('Marque ajoutée :', newBrand);
+
+  res.status(201).json({ message: 'Marque ajoutée avec succès', data: newBrand });
 });
 
 app.use('/brand', brandRouter);

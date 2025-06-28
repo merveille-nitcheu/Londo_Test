@@ -16,8 +16,8 @@ export class BrandService {
 
 
 
-  storeBrand(formData: FormData) {
-    return this.http.post(`${this.apiUrl}/storebrand`, formData);
+  storeBrand(data: { brand_name: string; description: string }) {
+    return this.http.post(`${this.apiUrl}/storebrand`, data);
   }
 }
 

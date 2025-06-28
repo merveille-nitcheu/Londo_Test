@@ -45,6 +45,7 @@
                   type="text"
                   [(ngModel)]="searchQuery"
                   placeholder="Rechercher les marques"
+                  name="search"
                   required=""
                   class="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 />
@@ -167,10 +168,12 @@
 
   <!-- Add brand Modal -->
   <div
+
     id="createBrandModal"
     tabindex="-1"
     data-modal-backdrop="static"
     aria-hidden="true"
+    [ngClass]="{ 'hidden': !isModalOpen, 'flex': isModalOpen }"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] md:h-full"
   >
     <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
