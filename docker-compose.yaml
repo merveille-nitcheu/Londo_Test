@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
     image: angular:v1
     container_name: angular
-    ports:
-      - "4200:80"
     networks:
       - app-network
 

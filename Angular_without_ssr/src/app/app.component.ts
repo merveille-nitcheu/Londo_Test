@@ -40,6 +40,10 @@ export class AppComponent {
       });
     }
 
+    gotoNestsjs() {
+  window.location.href = '/nestjs';
+}
+
     get paginatedBrands(): any[] {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       return this.filteredBrands.slice(start, start + this.itemsPerPage);
