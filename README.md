@@ -6,6 +6,15 @@ Ce projet contient un Dockerfile optimisé pour construire et déployer une appl
 
 Docker installé (testé avec Docker Desktop sur Windows/Linux/Mac)
 
+## Cloner le depot git 
+
+````git clone https://github.com/merveille-nitcheu/Londo_Test.git````
+
+## Se positionner dans le repertoire 
+
+````cd Londo_Test````
+
+
 ## Étapes de Build
 
 
