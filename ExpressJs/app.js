@@ -93,29 +93,26 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Route GET pour tester la communication
-app.get('/api/brand/getallbrands', (req, res) => {
-  // renvoyer un tableau mock
+const brandRouter = express.Router();
+
+brandRouter.get('/getallbrands', (req, res) => {
   res.json([
     { brand_name: "Marque Test 1", description: "Description 1" },
     { brand_name: "Marque Test 2", description: "Description 2" }
   ]);
 });
 
-// Route POST pour tester réception des données
-app.post('/api/brand/storebrand', (req, res) => {
+brandRouter.post('/storebrand', (req, res) => {
   console.log('Données reçues:', req.body);
-
-  // Renvoyer simplement une confirmation avec les données reçues
-  res.status(201).json({
-    message: 'Données reçues avec succès',
-    data: req.body
-  });
+  res.status(201).json({ message: 'Données reçues avec succès', data: req.body });
 });
+
+app.use('/brand', brandRouter);
+
 
 // Démarrer le serveur
 const port = 3001;
-app.listen(port, () => {
-  console.log(`Serveur backend Express démarré sur http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Serveur backend Express démarré sur http://0.0.0.0:${port}`);
 });
 

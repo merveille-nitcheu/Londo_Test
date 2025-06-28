@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BrandService {
 
-  private apiUrl = 'express/api/brand';
+  private apiUrl = '/api/brand';
 
   constructor(private http: HttpClient) {}
 

@@ -50,7 +50,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     image: nginx:v1
-    container_name: nginx_proxydocker
+    container_name: nginx_proxy
     ports:
       - "80:80"
       - "443:443"
