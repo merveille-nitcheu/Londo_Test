@@ -3,22 +3,28 @@ version: '3.8'
 services:
   angular:
     build:
-      context: ./Angular
+      context: ./Angular_without_ssr
     container_name: angular
+    ports:
+      - "4200:80"
     networks:
       - app-network
 
   angular-ssr:
     build:
-      context: ./angular-ssr
+      context: ./Angular_with_ssr
     container_name: angular_ssr
+    ports:
+      - "4000:4000"
     networks:
       - app-network
 
   nestjs:
     build:
-      context: ./nestjs
+      context: ./Nestsjs_project
     container_name: nestjs
+    ports:
+      - "3000:3000"
     networks:
       - app-network
 
@@ -26,6 +32,12 @@ services:
     build:
       context: ./ExpressJs
     container_name: express
+    environment:
+      DB_USER: system
+      DB_PASSWORD: MySecurePass123
+      DB_CONNECT_STRING: localhost/XE
+    ports:
+      - "3001:3001"
     networks:
       - app-network
 
