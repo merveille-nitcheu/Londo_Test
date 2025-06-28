@@ -9,7 +9,7 @@ RUN echo "Copying package.json, the application code and installing dependencies
 
 COPY package*.json ./
 
-RUN npm ci 
+RUN npm install
 
 COPY . .
 

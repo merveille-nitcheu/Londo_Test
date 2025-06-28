@@ -1,10 +1,21 @@
-FROM nginx:alpine
-COPY nginx.conf /etc/nginx/nginx.conf
-RUN rm -rf /etc/nginx/conf.d/* && \
-    apk add --no-cache modsecurity && \
-    modsecurity-nginx
+FROM owasp/modsecurity:nginx-alpine
+    
+RUN mkdir -p /etc/modsecurity-custom
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+COPY modsecurity.conf /etc/modsecurity-custom/modsecurity.conf
+
+
+# RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+
+# RUN chown -R appuser:appgroup /etc/modsecurity-custom /var/log/nginx /tmp
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# USER appuser
+
+
+
 EXPOSE 80 443
+
 CMD ["nginx", "-g", "daemon off;"]

@@ -25,7 +25,9 @@ WORKDIR /app
 
 COPY --from=build /app/dist /app/dist
 
-# COPY --from=builder /app/node_modules /app/node_modules
+COPY --from=build /app/node_modules /app/node_modules
+
+COPY --from=build /app/package*.json /app/
 
 EXPOSE 3000
 CMD ["node", "dist/main.js"]
